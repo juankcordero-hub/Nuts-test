@@ -1,1 +1,245 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#171326">
+  <meta name="description" content="Descubre qué nuez define tu personalidad. Un test divertido con cero garantías científicas.">
+  <title>Instituto Internacional de Nuezología</title>
+
+  <style>
+    :root {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: #f8f4ff;
+      background: #171326;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      min-height: 100svh;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      background: radial-gradient(circle at 50% 0%, #443056, #171326 65%);
+    }
+
+    main {
+      width: min(100%, 520px);
+      padding: 34px 26px;
+      border: 1px solid #6c537b;
+      border-radius: 26px;
+      background: #241c33;
+      box-shadow: 0 22px 70px #0b071a99;
+      text-align: center;
+    }
+
+    .eyebrow {
+      color: #d7b4e7;
+      font-size: 11px;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      font-size: clamp(28px, 7vw, 39px);
+      line-height: 1.13;
+      margin: 18px 0;
+    }
+
+    h2 {
+      font-size: 27px;
+      margin: 10px 0;
+    }
+
+    p {
+      line-height: 1.65;
+      color: #ddd3e8;
+    }
+
+    .sub { font-size: 14px; }
+
+    .choices {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin: 26px 0;
+    }
+
+    button {
+      cursor: pointer;
+      border: 1px solid #826b95;
+      border-radius: 16px;
+      background: #392b4b;
+      color: white;
+      padding: 18px 8px;
+      font-size: 17px;
+      font-weight: 650;
+      transition: transform .15s, background .15s;
+    }
+
+    button:hover,
+    button:focus-visible {
+      background: #644477;
+      transform: translateY(-2px);
+    }
+
+    .emoji {
+      display: block;
+      font-size: 35px;
+      margin-bottom: 9px;
+    }
+
+    .result {
+      animation: appear .4s ease;
+    }
+
+    .result-emoji {
+      font-size: 54px;
+    }
+
+    .punch {
+      color: #f3d29a;
+      font-weight: 700;
+    }
+
+    .retry {
+      padding: 12px 25px;
+      margin-top: 16px;
+    }
+
+    footer {
+      font-size: 11px;
+      color: #ab9bb9;
+      margin-top: 24px;
+    }
+
+    [hidden] { display: none !important; }
+
+    @keyframes appear {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <div class="eyebrow">Instituto Internacional de Nuezología</div>
+
+    <section id="intro">
+      <h1>¿Qué nuez define tu personalidad? 🥜</h1>
+      <p class="sub">
+        Una elección. Un diagnóstico.
+        Cero garantías científicas. 🤭
+      </p>
+
+      <div class="choices">
+        <button type="button" data-nut="pecanas">
+          <span class="emoji">🥧</span>
+          Pecanas
+        </button>
+
+        <button type="button" data-nut="almendras">
+          <span class="emoji">🌰</span>
+          Almendras
+        </button>
+
+        <button type="button" data-nut="mani">
+          <span class="emoji">🥜</span>
+          Maní
+        </button>
+
+        <button type="button" data-nut="avellanas">
+          <span class="emoji">🍫</span>
+          Avellanas
+        </button>
+      </div>
+
+      <p class="sub">
+        Elige sabiamente. Estamos juzgando. 😂
+      </p>
+    </section>
+
+    <section id="result" class="result" hidden aria-live="polite">
+      <div id="resultEmoji" class="result-emoji"></div>
+      <h2 id="resultTitle"></h2>
+      <p id="resultBody"></p>
+      <p id="resultPunch" class="punch"></p>
+
+      <button type="button" id="retry" class="retry">
+        Intentarlo otra vez ↻
+      </button>
+    </section>
+
+    <footer>
+      Estudio 100 % recreativo · Ninguna nuez fue consultada
+      durante esta investigación.
+    </footer>
+  </main>
+
+  <script>
+    const data = {
+      pecanas: {
+        emoji: "🥧",
+        title: "Elegancia peligrosa",
+        body: "Hay personas que no necesitan esforzarse para llamar la atención. Tienes una mezcla interesante de atractivo, inteligencia y picardía. Observas más de lo que dices y sabes exactamente cuándo soltar un comentario que deja a cualquiera sin palabras.",
+        punch: "Mucho encanto, demasiada inteligencia y un sarcasmo que debería requerir licencia. 😂"
+      },
+
+      almendras: {
+        emoji: "🌰",
+        title: "Disciplina con actitud",
+        body: "Te gusta cuidar los detalles, mantener el control y hacer las cosas bien. Pero detrás de esa disciplina hay una personalidad atractiva, inteligente y bastante atrevida. Y cuando alguien te reta, aparece un lado que no todo el mundo conoce.",
+        punch: "Vida saludable, mente brillante y una dosis de travesura difícil de disimular. 🤭"
+      },
+
+      mani: {
+        emoji: "🥜",
+        title: "Encanto incorregible",
+        body: "Tienes una energía contagiosa y una facilidad increíble para convertir cualquier momento en algo divertido. Tu atractivo va mucho más allá de lo físico: está en tu inteligencia, tu espontaneidad y esa manera tan natural de atreverte a decir lo que piensas.",
+        punch: "Encanto natural, inteligencia de sobra y cero garantías de buen comportamiento. 😂"
+      },
+
+      avellanas: {
+        emoji: "🍫",
+        title: "Misterio con picardía",
+        body: "Tienes una combinación curiosa de inteligencia, atractivo y misterio. Sabes escuchar, observar y sorprender cuando menos se espera. Y cuando aparece tu lado atrevido, tienes el talento de actuar después como si absolutamente nada hubiera pasado.",
+        punch: "Mucho atractivo, una mente interesante y una inocencia bastante cuestionable. 🤭"
+      }
+    };
+
+    const intro = document.getElementById("intro");
+    const result = document.getElementById("result");
+
+    document.querySelectorAll("[data-nut]").forEach(button => {
+      button.addEventListener("click", () => {
+        const selected = data[button.dataset.nut];
+
+        document.getElementById("resultEmoji").textContent = selected.emoji;
+        document.getElementById("resultTitle").textContent = selected.title;
+        document.getElementById("resultBody").textContent = selected.body;
+        document.getElementById("resultPunch").textContent = selected.punch;
+
+        intro.hidden = true;
+        result.hidden = false;
+      });
+    });
+
+    document.getElementById("retry").addEventListener("click", () => {
+      result.hidden = true;
+      intro.hidden = false;
+    });
+  </script>
+</body>
+</html>
  
